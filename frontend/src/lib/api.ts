@@ -3,7 +3,7 @@
  * 与 FastAPI 后端通信
  */
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'https://karmacode.onrender.com';
 
 export interface BirthData {
   birthDate: string;

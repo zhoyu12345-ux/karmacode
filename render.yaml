@@ -2,23 +2,17 @@ services:
   - type: web
     name: karmacode-api
     env: python
+    region: oregon
+    rootDir: backend
     buildCommand: pip install -r requirements.txt
     startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
     envVars:
-      - key: ANTHROPIC_API_KEY
-        sync: false
-      - key: SUPABASE_URL
-        sync: false
-      - key: SUPABASE_KEY
-        sync: false
-      - key: STRIPE_SECRET_KEY
-        sync: false
-      - key: STRIPE_WEBHOOK_SECRET
-        sync: false
+      - key: USE_MOCK_CLAUDE
+        value: "true"
       - key: FRONTEND_URL
-        value: https://karmacode.vercel.app
+        value: https://karmacode-r.netlify.app
       - key: ENV
         value: production
-      - key: USE_MOCK_CLAUDE
-        value: "false"
+      - key: PYTHON_VERSION
+        value: "3.11"
     autoDeploy: true
