@@ -12,6 +12,7 @@ from fastapi.responses import JSONResponse
 from app.api.bazi import router as bazi_router
 from app.api.reading import router as reading_router
 from app.api.payment import router as payment_router
+from app.api.health import router as health_router
 
 
 @asynccontextmanager
@@ -50,6 +51,7 @@ app.add_middleware(
 app.include_router(bazi_router, prefix="/api/bazi", tags=["BaZi"])
 app.include_router(reading_router, prefix="/api/reading", tags=["Reading"])
 app.include_router(payment_router, prefix="/api/payment", tags=["Payment"])
+app.include_router(health_router, prefix="/api", tags=["Health"])
 
 
 @app.get("/")
