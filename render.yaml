@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: karmacode-api
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_KEY
+        sync: false
+      - key: STRIPE_SECRET_KEY
+        sync: false
+      - key: STRIPE_WEBHOOK_SECRET
+        sync: false
+      - key: FRONTEND_URL
+        value: https://karmacode.vercel.app
+      - key: ENV
+        value: production
+      - key: USE_MOCK_CLAUDE
+        value: "false"
+    autoDeploy: true

@@ -1,0 +1,563 @@
+@import "tailwindcss";
+
+/* ============================================
+   KarmaCode Global Styles
+   Chinese Metaphysics Aesthetic
+   ============================================ */
+
+/* --- Tailwind v4 Theme Configuration --- */
+@theme inline {
+  /* Chinese Traditional Color Palette */
+  --color-vermillion: #C43A31;
+  --color-ink: #1A1A1A;
+  --color-ricePaper: #F5F0E8;
+  --color-gold: #C9A96E;
+  --color-jade: #5B8C5A;
+  --color-blueChine: #3B5998;
+  --color-darkInk: #0D0D0D;
+
+  /* Base theme variables */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-cardForeground: var(--card-foreground);
+  --color-border: var(--border);
+  --color-muted: var(--muted);
+  --color-mutedForeground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accentForeground: var(--accent-foreground);
+
+  /* Font Family */
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-serif: 'Noto Serif SC', 'Playfair Display', Georgia, serif;
+}
+
+/* --- Custom dark mode variant (class-based) --- */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ============================================
+   CSS Variables (Light & Dark)
+   ============================================ */
+:root {
+  --background: #F5F0E8;
+  --foreground: #1A1A1A;
+  --card: #FFFFFF;
+  --card-foreground: #1A1A1A;
+  --border: #D4C5B2;
+  --muted: #EAE0D3;
+  --muted-foreground: #6B5D4F;
+  --accent: #C9A96E;
+  --accent-foreground: #FFFFFF;
+  --radius: 0.5rem;
+}
+
+.dark {
+  --background: #0D0D0D;
+  --foreground: #E8E0D5;
+  --card: #1A1A1A;
+  --card-foreground: #E8E0D5;
+  --border: #3A3028;
+  --muted: #1E1E1E;
+  --muted-foreground: #9B8E7A;
+  --accent: #C9A96E;
+  --accent-foreground: #0D0D0D;
+}
+
+/* ============================================
+   Base Element Styles
+   ============================================ */
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Headings use serif font by default */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Noto Serif SC', 'Playfair Display', Georgia, serif;
+}
+
+/* ============================================
+   Rice Paper Texture Background
+   ============================================ */
+.rice-paper-bg,
+body {
+  background-color: var(--background);
+  background-image:
+    /* Subtle fiber lines */
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(180, 160, 140, 0.03) 2px,
+      rgba(180, 160, 140, 0.03) 4px
+    ),
+    /* Random speckles */
+    radial-gradient(
+      ellipse at 20% 50%,
+      rgba(180, 160, 140, 0.08) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      ellipse at 80% 20%,
+      rgba(180, 160, 140, 0.05) 0%,
+      transparent 40%
+    ),
+    radial-gradient(
+      ellipse at 50% 80%,
+      rgba(180, 160, 140, 0.06) 0%,
+      transparent 45%
+    ),
+    radial-gradient(
+      ellipse at 10% 90%,
+      rgba(200, 180, 150, 0.04) 0%,
+      transparent 35%
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 1px,
+      rgba(200, 185, 160, 0.02) 1px,
+      rgba(200, 185, 160, 0.02) 2px
+    );
+}
+
+/* Dark mode paper texture override */
+.dark body,
+.dark .rice-paper-bg {
+  background-color: #0D0D0D;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(60, 50, 40, 0.05) 2px,
+      rgba(60, 50, 40, 0.05) 4px
+    ),
+    radial-gradient(
+      ellipse at 20% 50%,
+      rgba(60, 50, 40, 0.1) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      ellipse at 80% 20%,
+      rgba(50, 40, 30, 0.08) 0%,
+      transparent 40%
+    );
+}
+
+/* ============================================
+   Ink Hover Effect (MoYun)
+   ============================================ */
+.ink-hover {
+  position: relative;
+  transition: color 0.4s ease, background-color 0.4s ease;
+}
+
+.ink-hover::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: inherit;
+  background: radial-gradient(
+    circle at var(--ink-x, 50%) var(--ink-y, 50%),
+    rgba(26, 26, 26, 0.08) 0%,
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ink-hover:hover::after {
+  opacity: 1;
+}
+
+/* Ink hover for dark mode */
+.dark .ink-hover::after {
+  background: radial-gradient(
+    circle at var(--ink-x, 50%) var(--ink-y, 50%),
+    rgba(201, 169, 110, 0.12) 0%,
+    transparent 70%
+  );
+}
+
+.ink-hover > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ============================================
+   Bagua Rotation Loading Animation
+   ============================================ */
+@keyframes bagua-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes bagua-pulse {
+  0%, 100% {
+    opacity: 0.6;
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: rotate(180deg) scale(1.05);
+  }
+}
+
+.bagua-loading {
+  display: inline-block;
+  width: 48px;
+  height: 48px;
+  border: 3px solid var(--accent, #C9A96E);
+  border-radius: 50%;
+  border-top-color: var(--foreground, #1A1A1A);
+  animation: bagua-rotate 1.5s linear infinite;
+  position: relative;
+}
+
+.bagua-loading::before {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border: 2px solid var(--accent, #C9A96E);
+  border-radius: 50%;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+  animation: bagua-rotate 2s linear infinite reverse;
+}
+
+.bagua-loading::after {
+  content: '☯';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: var(--foreground, #1A1A1A);
+  animation: bagua-pulse 2s ease-in-out infinite;
+}
+
+.bagua-loading-sm {
+  width: 24px;
+  height: 24px;
+  border-width: 2px;
+}
+
+.bagua-loading-sm::before {
+  inset: 3px;
+  border-width: 1.5px;
+}
+
+.bagua-loading-sm::after {
+  font-size: 10px;
+}
+
+.bagua-loading-lg {
+  width: 72px;
+  height: 72px;
+  border-width: 4px;
+}
+
+.bagua-loading-lg::before {
+  inset: 9px;
+  border-width: 3px;
+}
+
+.bagua-loading-lg::after {
+  font-size: 30px;
+}
+
+/* ============================================
+   Scroll Unfold Transition
+   ============================================ */
+@keyframes scroll-unfold-horizontal {
+  0% {
+    clip-path: inset(0 100% 0 0);
+    opacity: 0;
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+  }
+}
+
+@keyframes scroll-unfold-vertical {
+  0% {
+    clip-path: inset(100% 0 0 0);
+    opacity: 0;
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+  }
+}
+
+@keyframes scroll-roll-up {
+  0% {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+  }
+  100% {
+    clip-path: inset(100% 0 0 0);
+    opacity: 0;
+  }
+}
+
+.scroll-unfold {
+  animation: scroll-unfold-vertical 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+
+.scroll-unfold-h {
+  animation: scroll-unfold-horizontal 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+
+.scroll-enter {
+  clip-path: inset(100% 0 0 0);
+  opacity: 0;
+  transition: clip-path 0.6s cubic-bezier(0.22, 0.61, 0.36, 1),
+              opacity 0.6s ease;
+}
+
+.scroll-enter.visible {
+  clip-path: inset(0 0 0 0);
+  opacity: 1;
+}
+
+.scroll-enter-delay-1 { transition-delay: 0.1s; }
+.scroll-enter-delay-2 { transition-delay: 0.2s; }
+.scroll-enter-delay-3 { transition-delay: 0.3s; }
+.scroll-enter-delay-4 { transition-delay: 0.4s; }
+.scroll-enter-delay-5 { transition-delay: 0.5s; }
+
+/* ============================================
+   Custom Scrollbar
+   ============================================ */
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #C9A96E transparent;
+}
+
+/* Webkit (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #C9A96E, #A68A4A);
+  border-radius: 3px;
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #D4B87A, #B89850);
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* Dark mode scrollbar */
+.dark ::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #8B7A55, #6B5D3F);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #A68A4A, #8B7A55);
+}
+
+/* ============================================
+   Chinese Cloud Pattern Border
+   ============================================ */
+.chinese-pattern {
+  position: relative;
+  border: 2px solid var(--accent, #C9A96E);
+  padding: 2rem;
+}
+
+.chinese-pattern::before {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  right: 6px;
+  bottom: 6px;
+  border: 1px solid rgba(201, 169, 110, 0.4);
+  pointer-events: none;
+
+  /* Cloud corner ornaments */
+  background-image:
+    /* Top-left corner */
+    radial-gradient(circle at 12px 12px, rgba(201, 169, 110, 0.3) 2px, transparent 3px),
+    radial-gradient(circle at 24px 24px, rgba(201, 169, 110, 0.15) 1.5px, transparent 2px),
+    /* Top-right corner */
+    radial-gradient(circle at calc(100% - 12px) 12px, rgba(201, 169, 110, 0.3) 2px, transparent 3px),
+    radial-gradient(circle at calc(100% - 24px) 24px, rgba(201, 169, 110, 0.15) 1.5px, transparent 2px),
+    /* Bottom-left corner */
+    radial-gradient(circle at 12px calc(100% - 12px), rgba(201, 169, 110, 0.3) 2px, transparent 3px),
+    radial-gradient(circle at 24px calc(100% - 24px), rgba(201, 169, 110, 0.15) 1.5px, transparent 2px),
+    /* Bottom-right corner */
+    radial-gradient(circle at calc(100% - 12px) calc(100% - 12px), rgba(201, 169, 110, 0.3) 2px, transparent 3px),
+    radial-gradient(circle at calc(100% - 24px) calc(100% - 24px), rgba(201, 169, 110, 0.15) 1.5px, transparent 2px);
+  background-repeat: no-repeat;
+}
+
+/* Chinese pattern variant: more ornate */
+.chinese-pattern-ornate {
+  position: relative;
+  border: 3px solid var(--accent, #C9A96E);
+  padding: 2.5rem;
+  box-shadow:
+    inset 0 0 0 1px rgba(201, 169, 110, 0.3),
+    0 0 0 1px rgba(201, 169, 110, 0.2);
+}
+
+.chinese-pattern-ornate::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  right: 8px;
+  bottom: 8px;
+  border: 1px solid rgba(201, 169, 110, 0.25);
+  pointer-events: none;
+}
+
+.chinese-pattern-ornate::after {
+  content: '◆';
+  position: absolute;
+  top: -9px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--accent, #C9A96E);
+  font-size: 14px;
+  background: var(--background, #F5F0E8);
+  padding: 0 8px;
+}
+
+/* ============================================
+   Grain / Texture Overlay
+   ============================================ */
+.texture-overlay {
+  position: relative;
+}
+
+.texture-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+}
+
+/* ============================================
+   Decorative Elements
+   ============================================ */
+
+/* Horizontal divider with diamond */
+.chinese-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  color: var(--accent, #C9A96E);
+}
+
+.chinese-divider::before,
+.chinese-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--accent, #C9A96E),
+    transparent
+  );
+}
+
+.chinese-divider::before {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--accent, #C9A96E)
+  );
+}
+
+.chinese-divider::after {
+  background: linear-gradient(
+    90deg,
+    var(--accent, #C9A96E),
+    transparent
+  );
+}
+
+/* ============================================
+   Card Styles
+   ============================================ */
+.chinese-card {
+  background: var(--card, #FFFFFF);
+  border: 1px solid var(--border, #D4C5B2);
+  border-radius: var(--radius, 0.5rem);
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.chinese-card:hover {
+  box-shadow:
+    0 4px 20px rgba(201, 169, 110, 0.15),
+    0 1px 3px rgba(26, 26, 26, 0.08);
+  border-color: var(--accent, #C9A96E);
+}
+
+/* ============================================
+   Gold Accent Text
+   ============================================ */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #C9A96E 0%, #D4B87A 50%, #B89850 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ============================================
+   Utility: Reduced Motion
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  .bagua-loading,
+  .bagua-loading::before,
+  .bagua-loading::after,
+  .scroll-unfold,
+  .scroll-unfold-h {
+    animation: none;
+  }
+
+  .scroll-enter {
+    clip-path: none;
+    opacity: 1;
+    transition: none;
+  }
+
+  .ink-hover::after {
+    transition: none;
+  }
+}

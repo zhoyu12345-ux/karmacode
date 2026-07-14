@@ -1,0 +1,211 @@
+{
+  "meta": {
+    "title": "命理术语表 - Bazi & Zhouyi Terminology Glossary",
+    "description": "面向海外市场的八字命理与周易术语中英对照表，含文化注释",
+    "version": "1.0",
+    "source": "《三命通会》《中国命理学史论》综合整理",
+    "target_audience": "English-speaking users interested in Chinese metaphysics"
+  },
+  "categories": {
+    "基础概念_Fundamentals": {
+      "八字_BaZi": {
+        "en": "Eight Characters / Four Pillars of Destiny",
+        "definition": "A system of destiny analysis based on the Heavenly Stems and Earthly Branches of birth year, month, day, and hour",
+        "cultural_note": "Think of it as a 'cosmic DNA' encoded at your birth moment"
+      },
+      "四柱_Four_Pillars": {
+        "en": "Four Pillars",
+        "columns": {
+          "年柱_Year_Pillar": {"en": "Year Pillar", "represents": "Ancestry, childhood, social environment"},
+          "月柱_Month_Pillar": {"en": "Month Pillar", "represents": "Parents, career foundation, youth"},
+          "日柱_Day_Pillar": {"en": "Day Pillar", "represents": "Self, spouse, marriage (MOST IMPORTANT)"},
+          "时柱_Hour_Pillar": {"en": "Hour Pillar", "represents": "Children, later life, hidden potential"}
+        }
+      },
+      "天干_Heavenly_Stems": {
+        "en": "Ten Heavenly Stems",
+        "items": [
+          {"char": "甲", "en": "Jia", "element": "Yang Wood", "image": "Tall tree, leader"},
+          {"char": "乙", "en": "Yi", "element": "Yin Wood", "image": "Vine, grass, flexible"},
+          {"char": "丙", "en": "Bing", "element": "Yang Fire", "image": "Sun, passion, warmth"},
+          {"char": "丁", "en": "Ding", "element": "Yin Fire", "image": "Candle flame, spirit"},
+          {"char": "戊", "en": "Wu", "element": "Yang Earth", "image": "Mountain, stable, reliable"},
+          {"char": "己", "en": "Ji", "element": "Yin Earth", "image": "Soil, nurturing, fertile"},
+          {"char": "庚", "en": "Geng", "element": "Yang Metal", "image": "Sword, axe, decisive"},
+          {"char": "辛", "en": "Xin", "element": "Yin Metal", "image": "Jewelry, refined, elegant"},
+          {"char": "壬", "en": "Ren", "element": "Yang Water", "image": "Ocean, free, adventurous"},
+          {"char": "癸", "en": "Gui", "element": "Yin Water", "image": "Dew, mist, mysterious"}
+        ]
+      },
+      "地支_Earthly_Branches": {
+        "en": "Twelve Earthly Branches",
+        "items": [
+          {"char": "子", "en": "Zi", "animal": "Rat", "element": "Water", "month": "December"},
+          {"char": "丑", "en": "Chou", "animal": "Ox", "element": "Earth", "month": "January"},
+          {"char": "寅", "en": "Yin", "animal": "Tiger", "element": "Wood", "month": "February"},
+          {"char": "卯", "en": "Mao", "animal": "Rabbit", "element": "Wood", "month": "March"},
+          {"char": "辰", "en": "Chen", "animal": "Dragon", "element": "Earth", "month": "April"},
+          {"char": "巳", "en": "Si", "animal": "Snake", "element": "Fire", "month": "May"},
+          {"char": "午", "en": "Wu", "animal": "Horse", "element": "Fire", "month": "June"},
+          {"char": "未", "en": "Wei", "animal": "Goat", "element": "Earth", "month": "July"},
+          {"char": "申", "en": "Shen", "animal": "Monkey", "element": "Metal", "month": "August"},
+          {"char": "酉", "en": "You", "animal": "Rooster", "element": "Metal", "month": "September"},
+          {"char": "戌", "en": "Xu", "animal": "Dog", "element": "Earth", "month": "October"},
+          {"char": "亥", "en": "Hai", "animal": "Pig", "element": "Water", "month": "November"}
+        ]
+      },
+      "五行_Five_Elements": {
+        "en": "Five Elements / Wu Xing",
+        "elements": {
+          "木_Wood": {"nature": "Growth, flexibility, creativity", "season": "Spring", "direction": "East"},
+          "火_Fire": {"nature": "Passion, energy, transformation", "season": "Summer", "direction": "South"},
+          "土_Earth": {"nature": "Stability, nurturing, grounding", "season": "Late Summer", "direction": "Center"},
+          "金_Metal": {"nature": "Structure, discipline, righteousness", "season": "Autumn", "direction": "West"},
+          "水_Water": {"nature": "Wisdom, adaptability, flow", "season": "Winter", "direction": "North"}
+        },
+        "cycles": {
+          "generating_生": "Wood→Fire→Earth→Metal→Water→Wood (Nurturing cycle)",
+          "controlling_克": "Wood→Earth→Water→Fire→Metal→Wood (Balancing cycle)"
+        }
+      }
+    },
+    "十神_Ten_Gods": {
+      "正官_ZhengGuan": {
+        "en": "Direct Officer / Authority Star",
+        "definition": "The Heavenly Stem that restrains the Day Master with opposite yin-yang polarity",
+        "represents": "Career, discipline, husband (for women), rules, social status",
+        "positive": "Responsible, law-abiding, dignified, good reputation",
+        "negative": "Rigid, overly cautious, suppressed"
+      },
+      "七杀_QiSha": {
+        "en": "Seven Killings / Challenger Star",
+        "definition": "The Heavenly Stem that restrains the Day Master with same yin-yang polarity",
+        "represents": "Pressure, competition, ambition, lover (for women), danger",
+        "positive": "Ambitious, decisive, entrepreneurial, heroic",
+        "negative": "Aggressive, reckless, prone to conflicts"
+      },
+      "正印_ZhengYin": {
+        "en": "Direct Resource / Nurturing Star",
+        "definition": "The Heavenly Stem that generates the Day Master with opposite polarity",
+        "represents": "Mother, education, protection, wisdom, support",
+        "positive": "Scholarly, kind, patient, well-supported",
+        "negative": "Over-dependent, lazy, unrealistic"
+      },
+      "偏印_PianYin": {
+        "en": "Indirect Resource / Unconventional Wisdom Star",
+        "definition": "The Heavenly Stem that generates the Day Master with same polarity",
+        "represents": "Unique talent, spirituality, unconventional thinking",
+        "positive": "Creative, intuitive, specialist knowledge",
+        "negative": "Eccentric, isolated, overthinking"
+      },
+      "正财_ZhengCai": {
+        "en": "Direct Wealth / Earned Income Star",
+        "definition": "The Heavenly Stem controlled by Day Master with opposite polarity",
+        "represents": "Salary, steady income, wife (for men), legitimate wealth",
+        "positive": "Frugal, steady, reliable earner",
+        "negative": "Stingy, materialistic, lacking ambition"
+      },
+      "偏财_PianCai": {
+        "en": "Indirect Wealth / Unexpected Fortune Star",
+        "definition": "The Heavenly Stem controlled by Day Master with same polarity",
+        "represents": "Windfall, investment, business income, father, concubine",
+        "positive": "Generous, entrepreneurial, socially skilled",
+        "negative": "Gambling, extravagant, unstable income"
+      },
+      "食神_ShiShen": {
+        "en": "Eating God / Talent Expression Star",
+        "definition": "The Heavenly Stem generated by Day Master with same polarity",
+        "represents": "Creativity, enjoyment, children (for women), relaxation",
+        "positive": "Artistic, easygoing, enjoys life, good cook",
+        "negative": "Lazy, indulgent, escapist"
+      },
+      "伤官_ShangGuan": {
+        "en": "Hurting Officer / Rebel Talent Star",
+        "definition": "The Heavenly Stem generated by Day Master with opposite polarity",
+        "represents": "Rebellious talent, sharp wit, innovation, criticism",
+        "positive": "Brilliant, innovative, charismatic, artistic",
+        "negative": "Arrogant, rebellious, hurts relationships"
+      },
+      "比肩_BiJian": {
+        "en": "Parallel / Equal Peer Star",
+        "definition": "Same Heavenly Stem as Day Master with same polarity",
+        "represents": "Peers, siblings, colleagues, competition",
+        "positive": "Independent, loyal, competitive",
+        "negative": "Stubborn, divides wealth, competitive"
+      },
+      "劫财_JieCai": {
+        "en": "Rob Wealth / Rival Peer Star",
+        "definition": "Same Heavenly Stem as Day Master with opposite polarity",
+        "represents": "Close friends, rivals, financial competition",
+        "positive": "Social, adventurous, bold",
+        "negative": "Financial loss, betrayal, impulsive"
+      }
+    },
+    "神煞_Spiritual_Stars": {
+      "天乙贵人_Nobleman": {
+        "en": "Heavenly Nobleman Star",
+        "meaning": "The most auspicious star - brings benefactors,贵人相助, rescues from danger"
+      },
+      "桃花咸池_Peach_Blossom": {
+        "en": "Peach Blossom / Romance Star",
+        "meaning": "Rules romance, charm, and sexual attraction. Can bring either beautiful relationships or scandals depending on chart quality",
+        "calculation": "寅午戌见卯, 巳酉丑见午, 申子辰见酉, 亥卯未见子"
+      },
+      "红鸾_Red_Luan": {
+        "en": "Red Luan Star",
+        "meaning": "Marriage star - indicates timing of marriage and romantic commitment"
+      },
+      "天喜_Heavenly_Joy": {
+        "en": "Heavenly Joy Star",
+        "meaning": "Celebration star - happy events, weddings, childbirth"
+      },
+      "孤辰寡宿_Loneliness": {
+        "en": "Solitude Stars",
+        "meaning": "Indicates tendency toward loneliness, late marriage, or emotional distance"
+      },
+      "羊刃_Ram_Blade": {
+        "en": "Yang Blade / Ram Star",
+        "meaning": "Extreme strength point - can indicate surgery, violence, or extraordinary willpower"
+      }
+    },
+    "格局_Chart_Patterns": {
+      "从财格": {"en": "Following Wealth Pattern", "meaning": "Wealth elements dominate, self surrenders to wealth energy"},
+      "从官格": {"en": "Following Officer Pattern", "meaning": "Authority elements dominate, self submits to career/discipline"},
+      "伤官格": {"en": "Rebel Talent Pattern", "meaning": "Creative genius with tendency to challenge authority"},
+      "正官格": {"en": "Direct Officer Pattern", "meaning": "Classic leadership and career success pattern"},
+      "财官双美": {"en": "Wealth & Office Double Beauty", "meaning": "Perfect balance of wealth and career - most auspicious"}
+    }
+  },
+  "marriage_terms": {
+    "夫星_Husband_Star": {
+      "en": "Husband Star",
+      "note": "For women: Direct Officer (正官) is the primary husband star, Seven Killings (七杀) is secondary",
+      "rules": ["Should be pure (only one type, not mixed)", "Should be supported by Wealth star", "Should not be harmed by Hurting Officer"]
+    },
+    "妻星_Wife_Star": {
+      "en": "Wife Star",
+      "note": "For men: Direct Wealth (正财) is the primary wife star, Indirect Wealth (偏财) is secondary",
+      "rules": ["Should be supported by Resource star", "Should not be robbed by Peer stars"]
+    },
+    "夫妻宫_Spouse_Palace": {
+      "en": "Spouse Palace",
+      "note": "The Earthly Branch of the Day Pillar - the 'home' of the spouse in the chart",
+      "rules": ["Should not be clashed (冲)", "Should not be harmed (害)", "Combinations (合) are auspicious"]
+    },
+    "女命八法_Female_Eight_Methods": {
+      "en": "Eight Methods for Female Charts",
+      "positive": {
+        "纯_Pure": "Single husband star type, no mixing",
+        "和_Harmonious": "Day Master gentle, balanced with husband star",
+        "清_Clean": "Clear distinction between officer and killing stars",
+        "贵_Noble": "Officer star supported by wealth, with nobleman stars"
+      },
+      "negative": {
+        "浊_Murky": "Mixed stars, chaotic elements",
+        "滥_Overflowing": "Too many husband stars, excessive desires",
+        "娼_Harlot": "Self too strong, husband star defeated, excessive talent star",
+        "淫_Lustful": "Multiple visible and hidden husband stars"
+      }
+    }
+  }
+}
