@@ -20,7 +20,7 @@ from app.ai.prompts import (
     build_daily_reading_prompt,
     build_compatibility_prompt,
 )
-from app.ai.claude_client import MockClaudeClient, ReadingConfig
+from app.ai.claude_client_v2 import MockClaudeClient, ReadingConfig
 
 router = APIRouter()
 
