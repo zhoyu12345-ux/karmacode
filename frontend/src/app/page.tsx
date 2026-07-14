@@ -20,6 +20,7 @@ export default function Home() {
   const [error, setError] = useState<string | null>(null);
   const [birthData, setBirthData] = useState<BirthData | null>(null);
   const [readingChars, setReadingChars] = useState(0);
+  const isDemoMode = typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('demo') === 'true';
 
   const handleBirthSubmit = useCallback(async (data: BirthData) => {
     setIsCalculating(true);
@@ -45,8 +46,8 @@ export default function Home() {
         setReading(text);
         setReadingChars(chars);
 
-        // Free tier: show ~30% content then trigger paywall
-        if (chars > 800 && !showPaywall) {
+        // Free tier: show ~30% content then trigger paywall (skip in demo mode)
+        if (!isDemoMode && chars > 800 && !showPaywall) {
           setShowPaywall(true);
           break;
         }
@@ -118,6 +119,13 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-ricePaper dark:bg-darkInk transition-colors duration-500">
+      {/* Demo Mode Banner */}
+      {isDemoMode && (
+        <div className="bg-gold text-ink text-center py-2 text-sm font-medium">
+          🎬 Demo Mode — Full content unlocked for recording
+        </div>
+      )}
+
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-b from-ink to-ink/90 dark:from-darkInk dark:to-darkInk/95 text-ricePaper py-20">
         <div className="absolute inset-0 opacity-10">
