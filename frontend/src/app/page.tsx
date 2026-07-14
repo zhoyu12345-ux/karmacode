@@ -6,6 +6,7 @@ import ChartDisplay from '@/components/ChartDisplay';
 import ReadingStream from '@/components/ReadingStream';
 import Paywall from '@/components/Paywall';
 import { calculateBazi, streamReading, ChartData } from '@/lib/api';
+import { createCheckoutSession } from '@/lib/stripe';
 
 type ReadingType = 'love' | 'wealth' | 'daily' | 'general';
 
@@ -60,10 +61,19 @@ export default function Home() {
 
   const handleContinueReading = useCallback(async () => {
     if (!birthData) return;
-    setShowPaywall(false);
-    setIsReading(true);
+
+    // 生成临时用户ID (后续接 Supabase 后可替换为真实用户ID)
+    const userId = 'user_' + Math.random().toString(36).substring(2, 10);
 
     try {
+      // 跳转到 Stripe 支付页面
+      await createCheckoutSession(userId);
+      // 支付成功后 Stripe 会重定向回 success_url
+      // 但因为我们还没设置 success_url，先继续阅读
+      // TODO: 等支付成功后从 URL 参数恢复阅读状态
+      setShowPaywall(false);
+      setIsReading(true);
+
       const stream = streamReading(birthData, readingType);
       let text = reading;
 
