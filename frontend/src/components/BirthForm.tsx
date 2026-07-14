@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 
 export interface BirthData {
   birthDate: string;
@@ -9,6 +9,7 @@ export interface BirthData {
   gender: 'male' | 'female';
   longitude: number;
   latitude: number;
+  locationName: string;
 }
 
 interface BirthFormProps {
@@ -16,38 +17,70 @@ interface BirthFormProps {
   isLoading?: boolean;
 }
 
-const CITY_COORDS: Record<string, { lat: number; lng: number }> = {
-  'Beijing': { lat: 39.9, lng: 116.4 },
-  'Shanghai': { lat: 31.2, lng: 121.5 },
-  'New York': { lat: 40.7, lng: -74.0 },
-  'London': { lat: 51.5, lng: -0.1 },
-  'Tokyo': { lat: 35.7, lng: 139.7 },
-  'Sydney': { lat: -33.9, lng: 151.2 },
-  'Los Angeles': { lat: 34.1, lng: -118.2 },
-  'Singapore': { lat: 1.3, lng: 103.8 },
-  'Paris': { lat: 48.9, lng: 2.3 },
-  'Seoul': { lat: 37.6, lng: 127.0 },
-};
-
 const HOURS = Array.from({ length: 24 }, (_, i) => i);
 const MINUTES = [0, 15, 30, 45];
+
+const POPULAR_CITIES = [
+  'Beijing', 'Shanghai', 'Tokyo', 'Seoul',
+  'New York', 'Los Angeles', 'London', 'Paris',
+  'Sydney', 'Singapore', 'Bangkok', 'Dubai',
+];
 
 export default function BirthForm({ onSubmit, isLoading }: BirthFormProps) {
   const [birthDate, setBirthDate] = useState('1990-01-01');
   const [birthHour, setBirthHour] = useState(8);
   const [birthMinute, setBirthMinute] = useState(0);
   const [gender, setGender] = useState<'male' | 'female'>('male');
-  const [city, setCity] = useState('Beijing');
-  const [customLng, setCustomLng] = useState('');
-  const [customLat, setCustomLat] = useState('');
+  const [locationInput, setLocationInput] = useState('Beijing');
+  const [isGeocoding, setIsGeocoding] = useState(false);
+  const [geocodeResult, setGeocodeResult] = useState<{lat: number; lng: number; name: string} | null>(
+    { lat: 39.9, lng: 116.4, name: 'Beijing, CN' }
+  );
+  const [showSuggestions, setShowSuggestions] = useState(false);
+
+  // 地理编码：输入城市名 → 经纬度
+  const geocode = useCallback(async (query: string) => {
+    if (!query.trim()) return;
+    setIsGeocoding(true);
+    try {
+      const resp = await fetch(
+        `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&limit=1`
+      );
+      const data = await resp.json();
+      if (data.length > 0) {
+        const result = {
+          lat: parseFloat(data[0].lat),
+          lng: parseFloat(data[0].lon),
+          name: data[0].display_name.split(',')[0] + ', ' + (data[0].display_name.split(',').pop() || '').trim(),
+        };
+        setGeocodeResult(result);
+        return result;
+      }
+    } catch (e) {
+      console.warn('Geocoding failed, using default');
+    } finally {
+      setIsGeocoding(false);
+    }
+    return null;
+  }, []);
+
+  const handleLocationBlur = async () => {
+    setShowSuggestions(false);
+    if (locationInput.trim()) {
+      await geocode(locationInput);
+    }
+  };
+
+  const handleSuggestionClick = async (city: string) => {
+    setLocationInput(city);
+    setShowSuggestions(false);
+    await geocode(city);
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    const coords = CITY_COORDS[city] || {
-      lat: parseFloat(customLat) || 30,
-      lng: parseFloat(customLng) || 120,
-    };
+    const coords = geocodeResult || { lat: 39.9, lng: 116.4, name: 'Beijing, CN' };
 
     onSubmit({
       birthDate,
@@ -56,6 +89,7 @@ export default function BirthForm({ onSubmit, isLoading }: BirthFormProps) {
       gender,
       longitude: coords.lng,
       latitude: coords.lat,
+      locationName: coords.name,
     });
   };
 
@@ -151,42 +185,54 @@ export default function BirthForm({ onSubmit, isLoading }: BirthFormProps) {
         </div>
 
         {/* Birth Place */}
-        <div>
+        <div className="relative">
           <label className="block text-xs font-medium text-ink/50 dark:text-ricePaper/50 mb-1.5">
             📍 Birth City
           </label>
-          <select
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
+          <input
+            type="text"
+            value={locationInput}
+            onChange={(e) => {
+              setLocationInput(e.target.value);
+              setShowSuggestions(true);
+            }}
+            onFocus={() => setShowSuggestions(true)}
+            onBlur={handleLocationBlur}
+            placeholder="Type your birth city..."
             className="w-full rounded-lg border border-gold/30 bg-white dark:bg-ink/50 px-3 py-2.5
-                       text-sm text-ink dark:text-ricePaper font-serif mb-2"
-          >
-            {Object.keys(CITY_COORDS).map((c) => (
-              <option key={c} value={c}>{c}</option>
-            ))}
-            <option value="custom">Other (custom coordinates)</option>
-          </select>
+                       text-sm text-ink dark:text-ricePaper font-serif
+                       focus:ring-2 focus:ring-gold/50 focus:border-gold transition-all"
+          />
 
-          {city === 'custom' && (
-            <div className="grid grid-cols-2 gap-3 animate-scroll-unfold">
-              <input
-                type="number"
-                placeholder="Longitude (e.g. 116.4)"
-                value={customLng}
-                onChange={(e) => setCustomLng(e.target.value)}
-                step="0.1"
-                className="w-full rounded-lg border border-gold/30 bg-white dark:bg-ink/50 px-3 py-2
-                           text-xs text-ink dark:text-ricePaper"
-              />
-              <input
-                type="number"
-                placeholder="Latitude (e.g. 39.9)"
-                value={customLat}
-                onChange={(e) => setCustomLat(e.target.value)}
-                step="0.1"
-                className="w-full rounded-lg border border-gold/30 bg-white dark:bg-ink/50 px-3 py-2
-                           text-xs text-ink dark:text-ricePaper"
-              />
+          {/* Suggestions dropdown */}
+          {showSuggestions && locationInput.length > 0 && (
+            <div className="absolute z-10 w-full mt-1 bg-white dark:bg-ink border border-gold/20 rounded-lg shadow-lg max-h-40 overflow-y-auto">
+              {POPULAR_CITIES.filter(c => c.toLowerCase().includes(locationInput.toLowerCase())).map(city => (
+                <button
+                  key={city}
+                  type="button"
+                  onMouseDown={(e) => { e.preventDefault(); handleSuggestionClick(city); }}
+                  className="w-full text-left px-3 py-2 text-sm text-ink dark:text-ricePaper hover:bg-gold/10 transition-colors font-serif"
+                >
+                  📍 {city}
+                </button>
+              ))}
+            </div>
+          )}
+
+          {/* Geocode result indicator */}
+          {isGeocoding ? (
+            <div className="flex items-center gap-1 mt-1 text-xs text-ink/40 dark:text-ricePaper/40">
+              <span className="bagua-loading bagua-loading-sm" />
+              Locating...
+            </div>
+          ) : geocodeResult ? (
+            <div className="flex items-center gap-1 mt-1 text-xs text-jade">
+              ✓ {geocodeResult.name} ({geocodeResult.lat.toFixed(1)}°, {geocodeResult.lng.toFixed(1)}°)
+            </div>
+          ) : (
+            <div className="flex items-center gap-1 mt-1 text-xs text-vermillion">
+              ⚠ City not found — using default coordinates
             </div>
           )}
         </div>
