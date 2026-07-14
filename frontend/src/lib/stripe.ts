@@ -10,8 +10,10 @@ const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 // ============================================================
 
 export interface CheckoutSessionResponse {
-  url: string;
+  checkout_url: string;
   session_id: string;
+  success: boolean;
+  mock?: boolean;
 }
 
 export interface PaymentVerificationResponse {
@@ -60,9 +62,9 @@ export async function createCheckoutSession(
 
     const data: CheckoutSessionResponse = await response.json();
 
-    // 重定向到 Stripe Checkout
-    if (data.url) {
-      window.location.href = data.url;
+    // 重定向到 Stripe Checkout (或 Mock URL)
+    if (data.checkout_url) {
+      window.location.href = data.checkout_url;
     } else {
       throw new Error('No checkout URL returned');
     }
