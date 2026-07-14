@@ -235,6 +235,7 @@ export default function Home() {
       {/* Paywall Modal */}
       {showPaywall && (
         <Paywall
+          isOpen={showPaywall}
           onUnlock={handleContinueReading}
           onClose={() => setShowPaywall(false)}
         />
