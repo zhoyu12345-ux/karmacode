@@ -20,13 +20,19 @@ from app.ai.prompts import (
     build_daily_reading_prompt,
     build_compatibility_prompt,
 )
-from app.ai.claude_client_v2 import MockClaudeClient, ReadingConfig
+from app.ai.deepseek_client import DeepSeekClient, ReadingConfig, create_client
+from app.ai.claude_client_v2 import MockClaudeClient
 
 router = APIRouter()
 
-# 使用Mock客户端(开发阶段)，生产环境切换为 ClaudeClient
-USE_MOCK = os.environ.get("USE_MOCK_CLAUDE", "true").lower() == "true"
-claude = MockClaudeClient()
+# AI 客户端：优先 DeepSeek，降级 Mock
+_real_ai = create_client()
+if _real_ai:
+    print("Using DeepSeek AI")
+    ai_client = _real_ai
+else:
+    print("DeepSeek not configured, using Mock")
+    ai_client = MockClaudeClient()
 
 
 class ReadingRequest(BaseModel):
@@ -103,7 +109,7 @@ async def generate_reading(request: ReadingRequest):
 
         if request.stream:
             async def generate():
-                async for chunk in claude.generate_reading_stream(
+                async for chunk in ai_client.generate_reading_stream(
                     system_prompt, user_prompt, config
                 ):
                     yield f"data: {json.dumps({'text': chunk})}\n\n"
@@ -120,7 +126,7 @@ async def generate_reading(request: ReadingRequest):
             )
         else:
             # 非流式 - 直接获取完整响应（毫秒级，不经 async generator）
-            full_text = claude.generate_reading_sync(
+            full_text = ai_client.generate_reading_sync(
                 system_prompt, user_prompt, config
             )
 
@@ -169,7 +175,7 @@ async def generate_compatibility(request: CompatibilityRequest):
         config = ReadingConfig(reading_type="compatibility", stream=True)
 
         async def generate():
-            async for chunk in claude.generate_reading_stream(
+            async for chunk in ai_client.generate_reading_stream(
                 system_prompt, user_prompt, config
             ):
                 yield f"data: {json.dumps({'text': chunk})}\n\n"
