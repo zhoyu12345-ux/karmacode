@@ -109,13 +109,11 @@ export default function Paywall({
     [onClose]
   );
 
-  const handleUnlock = useCallback(async () => {
-    setIsProcessing(true);
-    try {
-      await onUnlock();
-    } finally {
-      setIsProcessing(false);
-    }
+  const handleUnlock = useCallback(() => {
+    // 打开 Gumroad 支付链接
+    window.open('https://8686962729146.gumroad.com/l/cocctb', '_blank');
+    // 关闭付费墙，恢复阅读
+    onUnlock();
   }, [onUnlock]);
 
   if (!isOpen && !isAnimating) return null;
