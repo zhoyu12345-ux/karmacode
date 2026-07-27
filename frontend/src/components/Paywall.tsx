@@ -63,7 +63,7 @@ export default function Paywall({
   onClose,
   onUnlock,
   price = '$9.99',
-  title = '解锁完整命之书',
+  title = 'Unlock Your Book of Destiny',
   children,
   className = '',
 }: PaywallProps) {
@@ -179,16 +179,16 @@ export default function Paywall({
             </h2>
 
             <p className="text-sm text-stone-400 mb-2 leading-relaxed max-w-xs mx-auto">
-              解锁完整命之书，查看详细命盘解读、大运流年分析和人生指引
+              Unlock your complete BaZi chart reading, life cycle analysis, and personal guidance
             </p>
 
             {/* Features */}
             <div className="flex flex-col items-center gap-2 mb-6">
               {[
-                { icon: '📖', text: '完整八字命盘解读' },
-                { icon: '🔮', text: '十年大运详细分析' },
-                { icon: '💫', text: '流年运势精准预测' },
-                { icon: '🧘', text: '五行调和人生建议' },
+                { icon: '📖', text: 'Complete BaZi Chart Analysis' },
+                { icon: '🔮', text: '10-Year Life Cycles Decoded' },
+                { icon: '💫', text: 'Love & Career Forecast' },
+                { icon: '🧘', text: 'Five Element Balance Guide' },
               ].map((feature, idx) => (
                 <div
                   key={idx}
@@ -204,7 +204,7 @@ export default function Paywall({
             {/* Divider */}
             <div className="flex items-center gap-3 mb-6">
               <div className="flex-1 h-px bg-gradient-to-r from-transparent via-stone-700/50 to-transparent" />
-              <span className="text-[10px] text-stone-600 uppercase tracking-widest">一次购买 永久解锁</span>
+              <span className="text-[10px] text-stone-600 uppercase tracking-widest">One-Time Purchase · Lifetime Access</span>
               <div className="flex-1 h-px bg-gradient-to-r from-transparent via-stone-700/50 to-transparent" />
             </div>
 
@@ -215,7 +215,7 @@ export default function Paywall({
                   {price}
                 </span>
               </div>
-              <p className="text-[10px] text-stone-600 mt-1">一次付费，终身解锁</p>
+              <p className="text-[10px] text-stone-600 mt-1">Pay once. Yours forever.</p>
             </div>
 
             {/* CTA Button */}
@@ -244,12 +244,12 @@ export default function Paywall({
                 {isProcessing ? (
                   <>
                     <BaguaSpinnerMini />
-                    <span>处理中...</span>
+                    <span>Processing...</span>
                   </>
                 ) : (
                   <>
                     <span className="text-xl">🔓</span>
-                    <span>立即解锁</span>
+                    <span>Unlock Now</span>
                   </>
                 )}
               </span>
@@ -257,13 +257,13 @@ export default function Paywall({
 
             {/* Footer */}
             <p className="mt-4 text-[10px] text-stone-600">
-              解锁即表示您同意我们的
+              By unlocking, you agree to our
               <button type="button" className="text-amber-600/80 hover:text-amber-500 underline underline-offset-2 mx-0.5">
-                服务条款
+                Terms of Service
               </button>
-              和
+              and
               <button type="button" className="text-amber-600/80 hover:text-amber-500 underline underline-offset-2 mx-0.5">
-                隐私政策
+                Privacy Policy
               </button>
             </p>
           </div>
