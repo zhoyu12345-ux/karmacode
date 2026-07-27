@@ -46,8 +46,8 @@ export default function Home() {
         setReading(text);
         setReadingChars(chars);
 
-        // Paywall disabled for now
-        if (false && !isDemoMode && chars > 800 && !showPaywall) {
+        // Free tier: show ~30% then trigger paywall
+        if (!isDemoMode && chars > 800 && !showPaywall) {
           setShowPaywall(true);
           break;
         }
