@@ -72,17 +72,17 @@ export default function DailySign({ birthData }: DailySignProps) {
       {/* 罗盘 */}
       <div className="text-center">
         <div onClick={handleReveal}
-          className={`relative w-40 h-40 mx-auto cursor-pointer select-none transition-transform hover:scale-105 ${isSpinning?'pointer-events-none':''}`}>
-          <div className={`absolute inset-0 rounded-full border border-gold/50 ${isSpinning?'animate-spin'}`}
+          className={'relative w-40 h-40 mx-auto cursor-pointer select-none transition-transform hover:scale-105' + (isSpinning ? ' pointer-events-none' : '')}>
+          <div className={'absolute inset-0 rounded-full border border-gold/50' + (isSpinning ? ' animate-spin' : '')}
             style={{animationDuration:'2.5s'}}/>
-          <div className={`absolute inset-2 rounded-full border border-gold/30 ${isSpinning?'animate-spin'}`}
+          <div className={'absolute inset-2 rounded-full border border-gold/30' + (isSpinning ? ' animate-spin' : '')}
             style={{animationDuration:'1.8s',animationDirection:'reverse'}}/>
           <div className="absolute inset-4 rounded-full border border-gold/10"/>
           <div className="absolute inset-6 rounded-full bg-ink/[0.02] dark:bg-ricePaper/[0.02] flex items-center justify-center">
-            <div className={`text-2xl ${isSpinning?'animate-pulse':''}`}>☯</div>
+            <div className={'text-2xl' + (isSpinning ? ' animate-pulse' : '')}>☯</div>
           </div>
           <div className="absolute inset-12 rounded-full flex items-center justify-center">
-            <span className="text-[10px] text-gold/60 font-serif tracking-widest">{isSpinning?'...':'轻触'}</span>
+            <span className="text-[10px] text-gold/60 font-serif tracking-widest">{isSpinning ? '...' : '轻触'}</span>
           </div>
         </div>
         <p className="text-xs text-ink/20 mt-4 font-serif">
