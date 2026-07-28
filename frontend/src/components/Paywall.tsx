@@ -110,11 +110,9 @@ export default function Paywall({
   );
 
   const handleUnlock = useCallback(() => {
-    // 打开 Gumroad 支付链接
-    window.open('https://8686962729146.gumroad.com/l/cocctb', '_blank');
-    // 关闭付费墙，恢复阅读
-    onUnlock();
-  }, [onUnlock]);
+    // 跳转到 Gumroad 支付页面（当前页，不弹窗）
+    window.location.href = 'https://8686962729146.gumroad.com/l/cocctb';
+  }, []);
 
   if (!isOpen && !isAnimating) return null;
 
